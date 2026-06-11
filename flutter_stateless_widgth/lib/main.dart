@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
 
 import 'package:flutter/material.dart';
 
+// hot restart restart the complete app from the void main and on the other hand hot reload restart the app from the widget this is the biggest difference
+
+
 void main() {
   runApp(MaterialApp(home: MyApp()));
 }
@@ -28,12 +31,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+// hot reload restart the app from the widget this is the biggest difference
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Stateless Widget")),
       body: Center(
-        child: const Text("hello flutter", style: TextStyle(fontSize: 30),),
+        child: const Text("hello flutter", style: TextStyle(fontSize: 30)),
       ),
     );
   }

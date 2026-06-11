@@ -1,0 +1,92 @@
+🟢 1. App start (common for both)
+
+Both Hot Reload and Hot Restart ultimately come from:
+
+void main() {
+  runApp(MyApp());
+}
+
+This is the entry point of the app.
+
+🔥 HOT RELOAD (what happens)
+👉 Hot Reload does NOT restart main()
+
+It keeps the app running and only rebuilds the widget tree.
+
+Example code:
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print("BUILD CALLED");
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text("Hello"),
+        ),
+      ),
+    );
+  }
+}
+🔥 When you press HOT RELOAD:
+
+Only this runs again:
+
+Widget build(BuildContext context)
+
+✔ main() NOT called again
+✔ runApp() NOT called again
+✔ State is preserved
+
+Output in console:
+BUILD CALLED   (again and again)
+
+👉 So Hot Reload starts from:
+
+build() method only
+
+🔄 HOT RESTART (what happens)
+
+Hot Restart restarts the whole app from scratch.
+
+Same code:
+void main() {
+  print("MAIN STARTED");
+
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print("BUILD CALLED");
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text("Hello"),
+        ),
+      ),
+    );
+  }
+}
+🔄 When you press HOT RESTART:
+
+Everything resets:
+
+Step-by-step flow:
+1. main() runs again
+2. runApp() runs again
+3. MyApp is recreated
+4. build() runs again
+Console output:
+MAIN STARTED
+BUILD CALLED
+⚡ FINAL DIFFERENCE (CODE LEVEL)
+Action	Where execution starts
+Hot Reload	build() method
+Hot Restart	main() method
